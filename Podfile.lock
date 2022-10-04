@@ -1,0 +1,16 @@
+PODS:
+  - Haptica (3.0.3)
+
+DEPENDENCIES:
+  - Haptica
+
+SPEC REPOS:
+  trunk:
+    - Haptica
+
+SPEC CHECKSUMS:
+  Haptica: 23497230b2d7476621f7860263ae0667279a0a89
+
+PODFILE CHECKSUM: 70f6b52cbd0b0bbbb93a433da1ba629fd557a650
+
+COCOAPODS: 1.11.3

@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import Haptica
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello").padding(.all).background(Color.green)
+        Button("BUTTON") {
+            Haptic.impact(.heavy).generate()
+        }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
