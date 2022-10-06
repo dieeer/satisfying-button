@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  uiTest
 //
-//  Created by justin on 10/4/22.
+//  Created by justin reid on 10/4/22.
 //
 
 import SwiftUI
@@ -11,7 +11,6 @@ import Haptica
 struct ContentView: View {
     
     @State private var fadeInOut = false
-    
     @State private var Counter: Int = 0
     @State var showAlert = false
     
@@ -57,29 +56,34 @@ struct ContentView: View {
         })
         
         VStack(alignment: .center, spacing: 10, content: {
-            Text("\(Counter)").font(.system(size:200)).fontWeight(.bold).padding(.vertical, 10.0)
+            Text("\(Counter)")
+                .font(.system(size:200))
+                .fontWeight(.bold).padding(.vertical, 10.0)
+                .shadow(color: .white, radius: 5)
             
             Button("press me") {
                 Counter += 1
                 Haptic.impact(.heavy).generate()
-            }}).buttonStyle(GrowingButton())
-        
-        VStack {
-            Button("reset") {
-                Counter = 0
-                Haptic.impact(.soft).generate()
             }
-        }.buttonStyle(ResetButton())
+        }).buttonStyle(GrowingButton())
+        
+        VStack(spacing: 10) {
+            Button("reset") {
+                while Counter != 0 {
+                    repeat {
+                        Haptic.impact(.light).generate()
+                        Counter -= 1
+                        
+                    }
+                    while
+                        Counter != 0
+                }
+            }
+        }.buttonStyle(ResetButton()).padding(10)
 
         
 
     }
-
-
-
-
-
-    
     
     struct ResetButton: ButtonStyle {
         func makeBody(configuration: Configuration) -> some View {
