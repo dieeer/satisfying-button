@@ -10,17 +10,59 @@ import Haptica
 
 struct ContentView: View {
     
+    @State private var fadeInOut = false
+    
     @State private var Counter: Int = 0
     @State var showAlert = false
     
+    
     var body: some View {
-        VStack {
-            Text("button pressed: \(Counter) times!").padding(.bottom, 10.0)
+        
+        VStack(alignment: .center, spacing: 10, content:  {
             
-            Button("BUTTON") {
+            if (Counter <= 9) && (Counter >= 0) {
+                Text(" ")
+                    .offset(y: -100)
+                    .font(.system(size:48))
+                    .padding(10.0)
+                    .onAppear()
+                {
+                }.opacity(fadeInOut ? 0 : 1)
+            }
+            
+            else if (Counter >= 10) && (Counter <= 19) {
+                Text("🎉")
+                    .offset(y: -100)
+                    .font(.system(size:48))
+                    .padding(10.0)
+                    .onAppear()
+                {
+                    withAnimation(Animation.easeInOut(duration:2.5)){
+                        fadeInOut.toggle()
+                    }
+                }.opacity(fadeInOut ? 0 : 1)
+            }
+            else if (Counter >= 20){
+                Text("🥳")
+                    .offset(y: -100)
+                    .font(.system(size:48))
+                    .padding(10.0)
+                    .onAppear()
+                {
+                    withAnimation(Animation.easeInOut(duration:2.5)){
+                        fadeInOut.toggle()
+                    }
+                }.opacity(fadeInOut ? 1 : 0)
+            }
+        })
+        
+        VStack(alignment: .center, spacing: 10, content: {
+            Text("\(Counter)").font(.system(size:200)).fontWeight(.bold).padding(.vertical, 10.0)
+            
+            Button("press me") {
                 Counter += 1
                 Haptic.impact(.heavy).generate()
-            }}.buttonStyle(GrowingButton())
+            }}).buttonStyle(GrowingButton())
         
         VStack {
             Button("reset") {
@@ -29,12 +71,7 @@ struct ContentView: View {
             }
         }.buttonStyle(ResetButton())
 
-        if (Counter >= 10) {
-            Text("woohoo")
-        }
-        else if (Counter >= 20) {
-            Text("😎")
-        }
+        
 
     }
 
